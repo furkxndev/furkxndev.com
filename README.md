@@ -92,6 +92,25 @@ değerlerini değiştirirsen tüm sitedeki vurgu renkleri birlikte değişir.
 5. Yayına aldıktan sonra `lib/data.ts` içindeki `siteUrl` değerinin `https://furkxndev.com`
    olduğundan emin ol — sitemap, canonical ve Open Graph adresleri buradan üretiliyor.
 
+## Kendi sunucunda yayına alma (Dokploy / Nixpacks / Coolify)
+
+Next.js 16 **Node.js 20.9+** ister. Nixpacks aksi belirtilmedikçe Node 18 seçer ve derleme
+`You are using Node.js 18.20.5...` hatasıyla düşer. Depoda sürüm iki yerden birden
+bildiriliyor, ikisi de sürüm seçicilerin okuduğu standart dosyalar:
+
+- `package.json` → `engines.node: ">=20.9.0"`
+- `.nvmrc` → `22`
+
+Yine de eski sürümü seçen bir ortam olursa, panelde şu ortam değişkenini tanımla:
+
+```
+NIXPACKS_NODE_VERSION=22
+```
+
+Uygulama `PORT` ortam değişkenini dinler ve `0.0.0.0` adresine bağlanır
+(`npm run start` → `next start -H 0.0.0.0`), bu yüzden konteyner içinde ek ayar
+gerekmez.
+
 ## Erişilebilirlik ve performans notları
 
 - Hareket azaltma tercihi (`prefers-reduced-motion`) açık olan cihazlarda tüm animasyonlar
