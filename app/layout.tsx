@@ -56,6 +56,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // iPhone'da "Ana Ekrana Ekle" ile sabitlendiğinde: tarayıcı çubuğu olmadan
+  // açılsın, ikon altındaki isim kısa kalsın, durum çubuğu koyu temaya uysun.
+  appleWebApp: {
+    capable: true,
+    title: profile.handle,
+    statusBarStyle: "black",
+  },
 };
 
 export const viewport: Viewport = {
@@ -96,6 +103,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Next `mobile-web-app-capable` üretiyor; iOS 17.4 öncesi Safari ise
+            tam ekran için hâlâ bu prefiksli sürümü arıyor. */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
